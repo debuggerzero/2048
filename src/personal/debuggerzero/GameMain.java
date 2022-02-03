@@ -220,8 +220,8 @@ public class GameMain extends JPanel {
     private BufferedImage checkPaint(Check check){
         BufferedImage image = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         g.setColor(check.getColor());
         g.fillRoundRect(0,0, check.WIDTH, check.HEIGHT, 62, 62);
         Color color = check.value == 0 ? new Color(0,0,0,0) : check.value <= 4 ? Color.BLACK:Color.WHITE;
@@ -240,8 +240,8 @@ public class GameMain extends JPanel {
     private BufferedImage boxPaint(BufferedImage image, String text, int score){
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         g.drawImage(image,0,0,null);
         g.setColor(Color.WHITE);
         Font font=new Font("黑体",Font.PLAIN,35);
@@ -258,8 +258,8 @@ public class GameMain extends JPanel {
     @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         pagePaint(g2);
     }
 
