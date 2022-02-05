@@ -299,7 +299,7 @@ public class GameMain extends JPanel {
                     timer.stop();
                     int result = JOptionPane.showConfirmDialog(
                             null,
-                            "点击是重新开始",
+                            "请点击是重新开始",
                             "提示",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.PLAIN_MESSAGE
