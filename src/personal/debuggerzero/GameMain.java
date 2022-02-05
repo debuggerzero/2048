@@ -100,8 +100,18 @@ public class GameMain extends JPanel {
                     }
                 }
             }
+            for (int i = 0; i < LINE - 1; i++){
+                if(check[LINE - 1][i].value == check[LINE - 1][i + 1].value){
+                    return false;
+                }
+            }
+            for (int i = 0; i < ROW - 1; i++){
+                if(check[i][ROW - 1].value == check[i + 1][ROW -1].value){
+                    return false;
+                }
+            }
         }
-        return true;
+        return list.isEmpty();
     }
 
     private void moveUp(){
@@ -289,7 +299,7 @@ public class GameMain extends JPanel {
                     timer.stop();
                     int result = JOptionPane.showConfirmDialog(
                             null,
-                            "点击确定重新开始",
+                            "点击是重新开始",
                             "提示",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.PLAIN_MESSAGE
@@ -307,7 +317,7 @@ public class GameMain extends JPanel {
 
     private void timerEvent(){
         ActionListener task = e -> {
-            if (getEmptyChecks().isEmpty() && gameOver()){
+            if (gameOver()){
                 timer.stop();
                 if (bestScore < score){
                     try {

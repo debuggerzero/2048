@@ -40,7 +40,6 @@ public class GameFrame {
     private void initCard() {
         //设置 JPanel 组件的布局
         card.setLayout(cardLayout);
-
         try {
             gameStart = new GameStart();
             gameMain = new GameMain();
