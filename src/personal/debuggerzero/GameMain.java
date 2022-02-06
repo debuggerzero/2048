@@ -51,6 +51,9 @@ public class GameMain extends JPanel {
 
     private Timer timer;
 
+    private BufferedImage checkImage;
+    private BufferedImage scoreImage;
+
     private void initGame(){
         score = 0;
         try {
@@ -228,8 +231,8 @@ public class GameMain extends JPanel {
 
     //绘制方块
     private BufferedImage checkPaint(Check check){
-        BufferedImage image = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = image.createGraphics();
+        checkImage = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = checkImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(check.getColor());
@@ -239,17 +242,17 @@ public class GameMain extends JPanel {
         Font font= check.getFont();
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics(font);
-        int widthX = (image.getWidth() - fm.stringWidth(Integer.toString(check.value))) / 2;
-        int widthY = (image.getHeight() - fm.getDescent() + fm.getAscent()) / 2;
+        int widthX = (checkImage.getWidth() - fm.stringWidth(Integer.toString(check.value))) / 2;
+        int widthY = (checkImage.getHeight() - fm.getDescent() + fm.getAscent()) / 2;
         g.drawString(Integer.toString(check.value), widthX, widthY);
         g.dispose();
-        return image;
+        return checkImage;
     }
 
     //绘制得分框
     private BufferedImage boxPaint(BufferedImage image, String text, int score){
-        BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = bufferedImage.createGraphics();
+        scoreImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = scoreImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.drawImage(image,0,0,null);
@@ -257,12 +260,12 @@ public class GameMain extends JPanel {
         Font font=new Font("黑体",Font.PLAIN,35);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics(font);
-        int widthX = (bufferedImage.getWidth() - fm.stringWidth(text)) / 2;
+        int widthX = (scoreImage.getWidth() - fm.stringWidth(text)) / 2;
         g.drawString(text, widthX, 65);
-        widthX = (bufferedImage.getWidth() - fm.stringWidth(Integer.toString(score))) / 2;
+        widthX = (scoreImage.getWidth() - fm.stringWidth(Integer.toString(score))) / 2;
         g.drawString(Integer.toString(score), widthX, 125);
         g.dispose();
-        return bufferedImage;
+        return scoreImage;
     }
 
     @Override
@@ -271,6 +274,7 @@ public class GameMain extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         pagePaint(g2);
+        g2.dispose();
     }
 
     @Override
@@ -281,6 +285,7 @@ public class GameMain extends JPanel {
         Graphics g2 = gameMain.getGraphics();
         paint(g2);
         g.drawImage(gameMain, 0, 0, null);
+        g2.dispose();
     }
 
     private void keyEvent(){
