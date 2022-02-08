@@ -28,14 +28,4 @@ public class GameStart extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         pagePaint(g2);
     }
-
-    @Override
-    public void update(Graphics g){
-        if (gameStart == null){
-            gameStart = this.createImage(GameFrame.WIDTH, GameFrame.HEIGHT);
-        }
-        Graphics gg = gameStart.getGraphics();
-        paint(gg);
-        g.drawImage(gameStart, 0, 0, null);
-    }
 }

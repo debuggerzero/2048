@@ -277,17 +277,6 @@ public class GameMain extends JPanel {
         g2.dispose();
     }
 
-    @Override
-    public void update(Graphics g){
-        if (gameMain == null){
-            gameMain = this.createImage(GameFrame.WIDTH, GameFrame.HEIGHT);
-        }
-        Graphics g2 = gameMain.getGraphics();
-        paint(g2);
-        g.drawImage(gameMain, 0, 0, null);
-        g2.dispose();
-    }
-
     private void keyEvent(){
         this.addKeyListener(new KeyAdapter() {
             @Override
