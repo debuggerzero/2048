@@ -3,9 +3,6 @@ package personal.debuggerzero;
 import javax.swing.*;
 import java.awt.*;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 /**
  * @author DebuggerZero
  */
@@ -17,12 +14,12 @@ public class GameFrame {
 
     private final JFrame jFrame = new JFrame("2048");
 
-    private final JPanel card = new JPanel();
+    public static JPanel card = new JPanel();
 
-    private final CardLayout cardLayout = new CardLayout();
+    public static CardLayout cardLayout = new CardLayout();
 
-    private GameStart gameStart;
-    private GameMain gameMain;
+    public static Page gameStart;
+    public static Page gameMain;
 
     private void initFrame(){
         //设置窗体尺寸
@@ -53,31 +50,10 @@ public class GameFrame {
         jFrame.add(card);
     }
 
-    private void mouseEvent(){
-        //gameState画板注册鼠标监听事件
-        gameStart.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1){
-                   int result = JOptionPane.showConfirmDialog(
-                           gameStart,
-                           "<html>按 W、A、S、D 或 ↑、↓、←、→<br>移动方块。<br>按 Esc 重新开始游戏。</html>",
-                           "提示", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE
-                   );
-                   if (result == JOptionPane.YES_OPTION){
-                       cardLayout.show(card,"GameMain");
-                       gameMain.requestFocus(true);
-                   }
-                }
-            }
-        });
-    }
-
     public GameFrame() throws Exception{
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         initCard();
         initFrame();
-        mouseEvent();
         SwingUtilities.updateComponentTreeUI(jFrame.getContentPane());
     }
 

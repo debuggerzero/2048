@@ -3,9 +3,7 @@ package personal.debuggerzero;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,12 +13,11 @@ import java.util.Random;
 /**
  * @author DebuggerZero
  */
-public class GameMain extends JPanel {
+public class GameMain extends Page {
 
     private final String GROUND_PATH = "assets\\BackGround.png";
     private final String SCORE_BOX_PATH = "assets\\ScoreBox.png";
 
-    private Image gameMain;
     private BufferedImage backGround;
     private BufferedImage scoreBox;
     private BufferedImage bestScoreBox;
@@ -213,22 +210,6 @@ public class GameMain extends JPanel {
         this.repaint();
     }
 
-    //页面绘制
-    private void pagePaint(Graphics2D g){
-        //绘制游戏背景
-        g.drawImage(backGround,BACKGROUND_X,BACKGROUND_Y,null);
-        //绘制方块
-        for (int i = 0; i < LINE; i++){
-            for (int j = 0; j < ROW; j++){
-                g.drawImage(checkPaint(check[i][j]), MAP_X + i * 128, MAX_Y + j * 128, null);
-            }
-        }
-        //绘制得分框
-        g.drawImage(boxPaint(scoreBox, "得分", score), SCORE_BOX_X, SCORE_BOX_Y, null);
-        //绘制最佳记录框
-        g.drawImage(boxPaint(bestScoreBox, "最高记录", bestScore), BEST_SCORE_BOX_X, BEST_SCORE_BOX_Y, null);
-    }
-
     //绘制方块
     private BufferedImage checkPaint(Check check){
         checkImage = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -269,44 +250,59 @@ public class GameMain extends JPanel {
     }
 
     @Override
+    public void initPage() throws Exception {
+        backGround = ImageIO.read(new File(GROUND_PATH));
+        scoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
+        bestScoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
+        timerEvent();
+        initGame();
+    }
+
+    @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        pagePaint(g2);
-        g2.dispose();
+        //绘制游戏背景
+        g2.drawImage(backGround,BACKGROUND_X,BACKGROUND_Y,null);
+        //绘制方块
+        for (int i = 0; i < LINE; i++){
+            for (int j = 0; j < ROW; j++){
+                g.drawImage(checkPaint(check[i][j]), MAP_X + i * 128, MAX_Y + j * 128, null);
+            }
+        }
+        //绘制得分框
+        g2.drawImage(boxPaint(scoreBox, "得分", score), SCORE_BOX_X, SCORE_BOX_Y, null);
+        //绘制最佳记录框
+        g2.drawImage(boxPaint(bestScoreBox, "最高记录", bestScore), BEST_SCORE_BOX_X, BEST_SCORE_BOX_Y, null);
     }
 
-    private void keyEvent(){
-        this.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
-                    moveUp();
-                } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-                    moveDown();
-                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-                    moveRight();
-                } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-                    moveLeft();
-                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    timer.stop();
-                    int result = JOptionPane.showConfirmDialog(
-                            null,
-                            "请点击是重新开始",
-                            "提示",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.PLAIN_MESSAGE
-                    );
-                    if (result == JOptionPane.YES_OPTION){
-                        initGame();
-                    }
-                    else {
-                        timer.start();
-                    }
-                }
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
+            moveUp();
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+            moveDown();
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+            moveRight();
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+            moveLeft();
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            timer.stop();
+            int result = JOptionPane.showConfirmDialog(
+                    null,
+                    "请点击是重新开始",
+                    "提示",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+            if (result == JOptionPane.YES_OPTION){
+                initGame();
             }
-        });
+            else {
+                timer.start();
+            }
+        }
     }
 
     private void timerEvent(){
@@ -338,11 +334,6 @@ public class GameMain extends JPanel {
 
     //构造函数
     public GameMain() throws Exception{
-        backGround = ImageIO.read(new File(GROUND_PATH));
-        scoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
-        bestScoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
-        keyEvent();
-        timerEvent();
-        initGame();
+        initPage();
     }
 }
