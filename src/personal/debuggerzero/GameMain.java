@@ -44,8 +44,6 @@ public class GameMain extends Page {
 
     private Storage save = new Storage();
 
-
-
     private Timer timer;
 
     private void initGame(){
