@@ -37,6 +37,11 @@ public class GameStart extends Page {
             );
             if (result == JOptionPane.YES_OPTION){
                 GameFrame.cardLayout.show(GameFrame.card,"GameMain");
+                try {
+                    GameFrame.gameMain.initPage();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 GameFrame.gameMain.requestFocus(true);
             }
         }

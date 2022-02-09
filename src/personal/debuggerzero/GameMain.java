@@ -328,9 +328,4 @@ public class GameMain extends Page {
         };
         timer = new Timer(100, task);
     }
-
-    //构造函数
-    public GameMain() throws Exception{
-        initPage();
-    }
 }
