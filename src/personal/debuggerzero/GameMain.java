@@ -44,12 +44,9 @@ public class GameMain extends Page {
 
     private Storage save = new Storage();
 
-    private String message;
+
 
     private Timer timer;
-
-    private BufferedImage checkImage;
-    private BufferedImage scoreImage;
 
     private void initGame(){
         score = 0;
@@ -212,7 +209,7 @@ public class GameMain extends Page {
 
     //绘制方块
     private BufferedImage checkPaint(Check check){
-        checkImage = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage checkImage = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = checkImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -232,7 +229,7 @@ public class GameMain extends Page {
 
     //绘制得分框
     private BufferedImage boxPaint(BufferedImage image, String text, int score){
-        scoreImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage scoreImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = scoreImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -291,7 +288,7 @@ public class GameMain extends Page {
             timer.stop();
             int result = JOptionPane.showConfirmDialog(
                     null,
-                    "请点击是重新开始",
+                    "请点击是重新开始...",
                     "提示",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.PLAIN_MESSAGE
@@ -307,6 +304,7 @@ public class GameMain extends Page {
 
     private void timerEvent(){
         ActionListener task = e -> {
+            String message;
             if (gameOver()){
                 timer.stop();
                 if (bestScore < score){
@@ -315,10 +313,10 @@ public class GameMain extends Page {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    message = "<html>恭喜你破纪录了！！<br>请点击确定重新开始。</html>";
+                    message = "<html>恭喜你破纪录了！！<br>请点击确定重新开始...</html>";
                 }
                 else {
-                    message = "游戏结束，请点击确定重新开始。";
+                    message = "游戏结束，请点击确定重新开始...";
                 }
                 JOptionPane.showMessageDialog(
                         null,
