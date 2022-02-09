@@ -260,6 +260,7 @@ public class GameMain extends Page {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //绘制游戏背景
         g2.drawImage(backGround,BACKGROUND_X,BACKGROUND_Y,null);
+
         //绘制方块
         for (int i = 0; i < LINE; i++){
             for (int j = 0; j < ROW; j++){
