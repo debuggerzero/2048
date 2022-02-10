@@ -1,4 +1,4 @@
-package personal.debuggerzero;
+package personal.debuggerzero.game;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package personal.debuggerzero;
+package personal.debuggerzero.game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -60,7 +60,6 @@ public class GameMain extends Page {
         }
         createCheck();
         timer.start();
-        this.repaint();
     }
 
     private void createCheck(){
@@ -130,7 +129,6 @@ public class GameMain extends Page {
             }
         }
         createCheck();
-        this.repaint();
     }
 
     private void moveDown(){
@@ -154,7 +152,6 @@ public class GameMain extends Page {
             }
         }
         createCheck();
-        this.repaint();
     }
 
     private void moveLeft(){
@@ -178,7 +175,6 @@ public class GameMain extends Page {
             }
         }
         createCheck();
-        this.repaint();
     }
 
     private void moveRight(){
@@ -202,7 +198,6 @@ public class GameMain extends Page {
             }
         }
         createCheck();
-        this.repaint();
     }
 
     //绘制方块
@@ -249,7 +244,7 @@ public class GameMain extends Page {
         backGround = ImageIO.read(new File(GROUND_PATH));
         scoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
         bestScoreBox = ImageIO.read(new File(SCORE_BOX_PATH));
-        timerEvent();
+        timer = new Timer(10, this);
         initGame();
     }
 
@@ -271,6 +266,36 @@ public class GameMain extends Page {
         g2.drawImage(boxPaint(scoreBox, "得分", score), SCORE_BOX_X, SCORE_BOX_Y, null);
         //绘制最佳记录框
         g2.drawImage(boxPaint(bestScoreBox, "最高记录", bestScore), BEST_SCORE_BOX_X, BEST_SCORE_BOX_Y, null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //重绘界面
+        this.repaint();
+
+        //判断游戏是否结束
+        if (gameOver()){
+            String message;
+            timer.stop();
+            if (bestScore < score){
+                try {
+                    save.write(score);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                message = "<html>恭喜你破纪录了！！<br>请点击确定重新开始...</html>";
+            }
+            else {
+                message = "游戏结束，请点击确定重新开始...";
+            }
+            JOptionPane.showMessageDialog(
+                    null,
+                    message,
+                    "提示",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+            initGame();
+        }
     }
 
     @Override
@@ -301,31 +326,6 @@ public class GameMain extends Page {
         }
     }
 
-    private void timerEvent(){
-        ActionListener task = e -> {
-            String message;
-            if (gameOver()){
-                timer.stop();
-                if (bestScore < score){
-                    try {
-                        save.write(score);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    message = "<html>恭喜你破纪录了！！<br>请点击确定重新开始...</html>";
-                }
-                else {
-                    message = "游戏结束，请点击确定重新开始...";
-                }
-                JOptionPane.showMessageDialog(
-                        null,
-                        message,
-                        "提示",
-                        JOptionPane.PLAIN_MESSAGE
-                );
-                initGame();
-            }
-        };
-        timer = new Timer(100, task);
-    }
+    //构造函数
+    public GameMain(){}
 }

@@ -1,4 +1,6 @@
-package personal.debuggerzero;
+package personal.debuggerzero.game;
+
+import personal.debuggerzero.GameFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

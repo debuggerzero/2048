@@ -1,16 +1,13 @@
-package personal.debuggerzero;
+package personal.debuggerzero.game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * @author Debugger
  */
-public abstract class Page extends JPanel implements MouseListener, KeyListener {
+public abstract class Page extends JPanel implements ActionListener, MouseListener, KeyListener {
 
     public Page(){
         addMouseListener(this);
@@ -21,6 +18,9 @@ public abstract class Page extends JPanel implements MouseListener, KeyListener 
 
     @Override
     public abstract void paint(Graphics g);
+
+    @Override
+    public void actionPerformed(ActionEvent e){}
 
     @Override
     public void mouseClicked(MouseEvent e){}

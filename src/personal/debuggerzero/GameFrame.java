@@ -1,5 +1,10 @@
 package personal.debuggerzero;
 
+import personal.debuggerzero.frame.MyFrame;
+import personal.debuggerzero.game.GameMain;
+import personal.debuggerzero.game.GameStart;
+import personal.debuggerzero.game.Page;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +17,7 @@ public class GameFrame {
     public final static int WIDTH = 600;
     public final static int HEIGHT = 800;
 
-    private final JFrame jFrame = new JFrame("2048");
+    private MyFrame myFrame = new MyFrame(WIDTH, HEIGHT);
 
     public static JPanel card = new JPanel();
 
@@ -22,16 +27,7 @@ public class GameFrame {
     public static Page gameMain;
 
     private void initFrame(){
-        //设置窗体尺寸
-        jFrame.setBounds(new Rectangle(WIDTH, HEIGHT));
-        //窗体居中
-        jFrame.setLocationRelativeTo(null);
-        //设置窗体不可改变大小
-        jFrame.setResizable(false);
-        //关闭窗口事件
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //设置窗体可见
-        jFrame.setVisible(true);
+
     }
 
     private void initCard() {
@@ -47,14 +43,14 @@ public class GameFrame {
         card.add("GameStart", gameStart);
         card.add("GameMain", gameMain);
 
-        jFrame.add(card);
+        myFrame.add(card);
     }
 
     public GameFrame() throws Exception{
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         initCard();
         initFrame();
-        SwingUtilities.updateComponentTreeUI(jFrame.getContentPane());
+        SwingUtilities.updateComponentTreeUI(myFrame.getContentPane());
     }
 
     public static void main(String[] args){
