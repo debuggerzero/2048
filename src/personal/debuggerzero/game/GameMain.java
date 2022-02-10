@@ -25,13 +25,13 @@ public class GameMain extends Page {
     private final int BACKGROUND_X = 0;
     private final int BACKGROUND_Y = 0;
 
-    private final int MAP_X = 45;
+    private final int MAP_X = 43;
     private final int MAX_Y = 230;
 
-    private final int SCORE_BOX_X = 45;
+    private final int SCORE_BOX_X = 43;
     private final int SCORE_BOX_Y = 35;
 
-    private final int BEST_SCORE_BOX_X = 304;
+    private final int BEST_SCORE_BOX_X = 301;
     private final int BEST_SCORE_BOX_Y = 35;
 
     private int score;
