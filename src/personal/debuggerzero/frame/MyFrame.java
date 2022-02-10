@@ -35,7 +35,7 @@ public class MyFrame extends JFrame {
 
     @Override
     public Component add(Component comp) {
-        dropShadowPanel.add(comp, BorderLayout.CENTER);
+        dropShadowPanel.add(comp);
         return comp;
     }
 }

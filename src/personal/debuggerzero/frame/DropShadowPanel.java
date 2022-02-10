@@ -2,6 +2,7 @@ package personal.debuggerzero.frame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -16,7 +17,7 @@ public class DropShadowPanel extends JPanel {
     public DropShadowPanel() {
         this.pixels = 10;
         Border border = BorderFactory.createEmptyBorder(pixels, pixels, pixels, pixels);
-        this.setBorder(BorderFactory.createCompoundBorder(this.getBorder(), border));
+        this.setBorder(border);
         this.setLayout(new BorderLayout());
     }
 
