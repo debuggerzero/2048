@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
  */
 public class TitleBarRightPanel extends JPanel {
 
-
     // jFrame 是需要控制的目标窗口
     public TitleBarRightPanel(JFrame jFrame) {
         //右对齐

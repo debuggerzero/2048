@@ -26,10 +26,6 @@ public class GameFrame {
     public static Page gameStart;
     public static Page gameMain;
 
-    private void initFrame(){
-
-    }
-
     private void initCard() {
         //设置 JPanel 组件的布局
         card.setLayout(cardLayout);
@@ -49,7 +45,6 @@ public class GameFrame {
     public GameFrame() throws Exception{
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         initCard();
-        initFrame();
         SwingUtilities.updateComponentTreeUI(myFrame.getContentPane());
     }
 

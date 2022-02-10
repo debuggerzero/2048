@@ -29,8 +29,6 @@ public class MyFrame extends JFrame {
         this.setBackground(new Color(255,255,255,0));
         //窗体居中
         this.setLocationRelativeTo(null);
-        //设置窗体不可改变大小
-        this.setResizable(false);
         //设置窗口可见
         this.setVisible(true);
     }

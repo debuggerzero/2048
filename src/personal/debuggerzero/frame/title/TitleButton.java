@@ -12,7 +12,7 @@ public class TitleButton extends JPanel {
     public TitleButton(String text ) {
         // 操作按钮
         JLabel jLabel = new JLabel(text);
-        jLabel.setFont(new Font("宋体",Font.BOLD,16));
+        jLabel.setFont(new Font("黑体",Font.BOLD,16));
         this.add(jLabel);
         this.setBackground(Color.WHITE);
         //取消默认选中
