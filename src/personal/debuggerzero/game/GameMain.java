@@ -1,14 +1,14 @@
 package personal.debuggerzero.game;
 
+import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author DebuggerZero
@@ -45,6 +45,12 @@ public class GameMain extends Page {
     private Storage save = new Storage();
 
     private Timer timer;
+
+    enum Move {
+        up, down, left, right
+    }
+
+    Queue<Move> moveList = new LinkedList<>();
 
     private void initGame(){
         score = 0;
@@ -108,114 +114,22 @@ public class GameMain extends Page {
         return list.isEmpty();
     }
 
-    private void moveUp(){
-        for (int x = 0; x < LINE; x++){
-            for (int y = 1, index = 0; y < ROW; y++){
-                if (check[x][y].value > 0){
-                    if (check[x][index].value == check[x][y].value){
-                        check[x][index].value <<= 1;
-                        check[x][y].value = 0;
-                        score += check[x][index].value;
-                    }
-                    else if (check[x][index].value == 0){
-                        check[x][index].value = check[x][y].value;
-                        check[x][y].value = 0;
-                    }
-                    else if (check[x][++index].value == 0){
-                        check[x][index].value = check[x][y].value;
-                        check[x][y].value = 0;
-                    }
-                }
-            }
-        }
-        createCheck();
-    }
-
-    private void moveDown(){
-        for (int x = LINE - 1; x >= 0; x--){
-            for (int y = ROW - 2, index = ROW - 1; y >=0 ; y--){
-                if (check[x][y].value > 0){
-                    if (check[x][index].value == check[x][y].value){
-                        check[x][index].value <<= 1;
-                        check[x][y].value = 0;
-                        score += check[x][index].value;
-                    }
-                    else if (check[x][index].value == 0){
-                        check[x][index].value = check[x][y].value;
-                        check[x][y].value = 0;
-                    }
-                    else if (check[x][--index].value == 0){
-                        check[x][index].value = check[x][y].value;
-                        check[x][y].value = 0;
-                    }
-                }
-            }
-        }
-        createCheck();
-    }
-
-    private void moveLeft(){
-        for (int x = 0; x < LINE; x++){
-            for (int y = 1, index = 0; y < ROW; y++){
-                if (check[y][x].value > 0){
-                    if (check[index][x].value == check[y][x].value){
-                        check[index][x].value <<= 1;
-                        check[y][x].value = 0;
-                        score += check[index][x].value;
-                    }
-                    else if (check[index][x].value == 0){
-                        check[index][x].value = check[y][x].value;
-                        check[y][x].value = 0;
-                    }
-                    else if (check[++index][x].value == 0){
-                        check[index][x].value = check[y][x].value;
-                        check[y][x].value = 0;
-                    }
-                }
-            }
-        }
-        createCheck();
-    }
-
-    private void moveRight(){
-        for (int x = LINE - 1; x >= 0; x--){
-            for (int y = ROW - 2, index = ROW - 1; y >=0 ; y--){
-                if (check[y][x].value > 0){
-                    if (check[index][x].value == check[y][x].value){
-                        check[index][x].value <<= 1;
-                        check[y][x].value = 0;
-                        score += check[index][x].value;
-                    }
-                    else if (check[index][x].value == 0){
-                        check[index][x].value = check[y][x].value;
-                        check[y][x].value = 0;
-                    }
-                    else if (check[--index][x].value == 0){
-                        check[index][x].value = check[y][x].value;
-                        check[y][x].value = 0;
-                    }
-                }
-            }
-        }
-        createCheck();
-    }
-
     //绘制方块
-    private BufferedImage checkPaint(Check check){
-        BufferedImage checkImage = new BufferedImage(check.WIDTH, check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
+    private BufferedImage checkPaint(int value){
+        BufferedImage checkImage = new BufferedImage(Check.WIDTH, Check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = checkImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(check.getColor());
-        g.fillOval(0,0, check.WIDTH, check.HEIGHT);
-        Color color = check.value == 0 ? new Color(0,0,0,0) : check.value <= 4 ? Color.BLACK:Color.WHITE;
+        g.setColor(Check.getColor(value));
+        g.fillOval(0,0, Check.WIDTH, Check.HEIGHT);
+        Color color = value == 0 ? new Color(0,0,0,0) : value <= 4 ? Color.BLACK:Color.WHITE;
         g.setColor(color);
-        Font font= check.getFont();
+        Font font= Check.getFont(value);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics(font);
-        int widthX = (checkImage.getWidth() - fm.stringWidth(Integer.toString(check.value))) / 2;
+        int widthX = (checkImage.getWidth() - fm.stringWidth(Integer.toString(value))) / 2;
         int widthY = (checkImage.getHeight() - fm.getDescent() + fm.getAscent()) / 2;
-        g.drawString(Integer.toString(check.value), widthX, widthY);
+        g.drawString(Integer.toString(value), widthX, widthY);
         g.dispose();
         return checkImage;
     }
@@ -258,12 +172,7 @@ public class GameMain extends Page {
         //绘制方块区域
         g2.setColor(new Color(255, 255, 255, 50));
         g2.fillRoundRect(MAP_X, MAX_Y, 504, 504, 35,35);
-        //绘制方块
-        for (int i = 0; i < LINE; i++){
-            for (int j = 0; j < ROW; j++){
-                g.drawImage(checkPaint(check[i][j]), MAP_X + i * 128, MAX_Y + j * 128, null);
-            }
-        }
+
         //绘制得分框
         g2.drawImage(boxPaint(scoreBox, "得分", score), SCORE_BOX_X, SCORE_BOX_Y, null);
         //绘制最佳记录框
@@ -291,7 +200,7 @@ public class GameMain extends Page {
                 message = "游戏结束，请点击确定重新开始...";
             }
             JOptionPane.showMessageDialog(
-                    null,
+                    this,
                     message,
                     "提示",
                     JOptionPane.PLAIN_MESSAGE
@@ -303,17 +212,17 @@ public class GameMain extends Page {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
-            moveUp();
+            moveList.offer(Move.up);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
-            moveDown();
+            moveList.offer(Move.down);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-            moveRight();
+            moveList.offer(Move.right);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-            moveLeft();
+            moveList.offer(Move.left);
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             timer.stop();
             int result = JOptionPane.showConfirmDialog(
-                    null,
+                    this,
                     "请点击是重新开始...",
                     "提示",
                     JOptionPane.YES_NO_OPTION,

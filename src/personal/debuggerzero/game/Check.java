@@ -5,19 +5,19 @@ import java.awt.*;
 /**
  * @author DebuggerZero
  */
-public class Check {
+public class Check extends Map {
     //定义方格的WIDTH, HEIGHT
-    public final int WIDTH = 120;
-    public final int HEIGHT = 120;
+    public final static int WIDTH = 120;
+    public final static int HEIGHT = 120;
 
-    //定义方块的初始分数
-    public int value;
+    //移动步长
+    public double stepSize;
 
-    public void init(){
+    public Check(){
         value = 0;
     }
 
-    public Color getColor(){
+    public static Color getColor(int value){
         switch (value) {
             case 0:
                 return new Color(0, 0, 0, 0);
@@ -52,7 +52,7 @@ public class Check {
         }
     }
 
-    public Font getFont() {
+    public static Font getFont(int value) {
         if (value < 16) {
             return new Font("宋体", Font.BOLD, 46);
         }
@@ -66,9 +66,5 @@ public class Check {
             return new Font("黑体", Font.BOLD, 28);
         }
         return new Font("黑体", Font.BOLD, 22);
-    }
-
-    public Check(){
-        init();
     }
 }

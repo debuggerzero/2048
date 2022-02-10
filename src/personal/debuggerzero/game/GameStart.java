@@ -5,7 +5,6 @@ import personal.debuggerzero.GameFrame;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -50,7 +49,7 @@ public class GameStart extends Page {
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1){
             int result = JOptionPane.showConfirmDialog(
-                    null,
+                    this,
                     "<html>按 W、A、S、D 或 ↑、↓、←、→<br>移动方块。<br>按 Esc 重新开始游戏。</html>",
                     "提示", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE
             );
