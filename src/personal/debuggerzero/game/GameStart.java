@@ -14,19 +14,23 @@ import java.io.File;
  */
 public class GameStart extends Page {
 
-    private final String HOME_PAGE_PATH = "assets\\HomePage.png";
+    private final String GROUND_PATH = "assets\\BackGround.png";
+    private final String TITLE_PATH = "assets\\2048.png";
 
     private BufferedImage homeGround;
+    private BufferedImage title;
 
     @Override
     public void initPage() throws Exception{
-        homeGround = ImageIO.read(new File(HOME_PAGE_PATH));
+        homeGround = ImageIO.read(new File(GROUND_PATH));
+        title = ImageIO.read(new File(TITLE_PATH));
     }
 
     @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
         g.drawImage(homeGround, 0, 0 ,null);
+        g.drawImage(title, (GameFrame.WIDTH - title.getWidth()) / 2, GameFrame.HEIGHT / 5, null);
     }
 
     @Override
