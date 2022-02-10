@@ -256,7 +256,7 @@ public class GameMain extends Page {
         //绘制游戏背景
         g2.drawImage(backGround,BACKGROUND_X,BACKGROUND_Y,null);
         //绘制方块区域
-        g2.setColor(new Color(205, 193, 180, 200));
+        g2.setColor(new Color(255, 255, 255, 50));
         g2.fillRoundRect(MAP_X, MAX_Y, 504, 504, 35,35);
         //绘制方块
         for (int i = 0; i < LINE; i++){
