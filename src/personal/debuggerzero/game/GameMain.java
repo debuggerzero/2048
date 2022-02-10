@@ -207,7 +207,7 @@ public class GameMain extends Page {
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(check.getColor());
-        g.fillRoundRect(0,0, check.WIDTH, check.HEIGHT, 62, 62);
+        g.fillOval(0,0, check.WIDTH, check.HEIGHT);
         Color color = check.value == 0 ? new Color(0,0,0,0) : check.value <= 4 ? Color.BLACK:Color.WHITE;
         g.setColor(color);
         Font font= check.getFont();
@@ -255,7 +255,9 @@ public class GameMain extends Page {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //绘制游戏背景
         g2.drawImage(backGround,BACKGROUND_X,BACKGROUND_Y,null);
-
+        //绘制方块区域
+        g2.setColor(new Color(205, 193, 180, 200));
+        g2.fillRoundRect(MAP_X, MAX_Y, 504, 504, 35,35);
         //绘制方块
         for (int i = 0; i < LINE; i++){
             for (int j = 0; j < ROW; j++){

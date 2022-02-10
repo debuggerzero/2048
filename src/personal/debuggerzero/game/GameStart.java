@@ -18,26 +18,17 @@ public class GameStart extends Page {
     private final String GROUND_PATH = "assets\\BackGround.png";
     private final String TITLE_PATH = "assets\\2048.png";
     private final String message = "-点击任意处开始游戏-";
-    private final String author = "AUTHOR: ZERO";
 
     private BufferedImage homeGround;
     private BufferedImage title;
 
-    Timer timer;
+    private int alpha = 100;
+    private int flag = 1;
 
     @Override
     public void initPage() throws Exception{
         homeGround = ImageIO.read(new File(GROUND_PATH));
         title = ImageIO.read(new File(TITLE_PATH));
-        timer = new Timer(10, this);
-        timer.start();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this.repaint();
-
-
     }
 
     @Override
@@ -49,9 +40,10 @@ public class GameStart extends Page {
         g2.drawImage(title, (GameFrame.WIDTH - title.getWidth()) / 2, GameFrame.HEIGHT / 5, null);
         Font font = new Font("黑体", Font.PLAIN,24);
         g2.setFont(font);
+        g2.setColor(new Color(255,255,255, alpha));
         FontMetrics fm = g.getFontMetrics(font);
         int widthX = (GameFrame.WIDTH - fm.stringWidth(message)) / 2;
-        g.drawString(message, widthX, GameFrame.HEIGHT / 5 * 4);
+        g2.drawString(message, widthX, GameFrame.HEIGHT / 5 * 4);
     }
 
     @Override
@@ -69,7 +61,6 @@ public class GameStart extends Page {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                timer.stop();
                 GameFrame.gameMain.requestFocus(true);
             }
         }

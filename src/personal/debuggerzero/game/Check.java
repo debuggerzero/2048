@@ -20,7 +20,7 @@ public class Check {
     public Color getColor(){
         switch (value) {
             case 0:
-                return new Color(205, 193, 180, 150);
+                return new Color(0, 0, 0, 0);
             case 2:
                 return new Color(238, 228, 218);
             case 4:
