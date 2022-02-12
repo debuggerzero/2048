@@ -59,7 +59,7 @@ public class GameMain extends Page {
     private boolean moveFlag = false;
     private Direction direction;
 
-    private void initGame(){
+    protected void initGame(){
         score = 0;
         try {
             bestScore = save.read();
@@ -75,7 +75,7 @@ public class GameMain extends Page {
         timer.start();
     }
 
-    private void createCheck(){
+    protected void createCheck(){
         ArrayList<Area> list = getEmptyArea();
         if (!list.isEmpty()){
             Random random = new Random();
@@ -87,7 +87,7 @@ public class GameMain extends Page {
         }
     }
 
-    private ArrayList<Area> getEmptyArea(){
+    protected ArrayList<Area> getEmptyArea(){
         ArrayList<Area> list = new ArrayList<>();
         for (int i = 0; i < LINE * ROW; i++){
             if (area[i].value == 0){
@@ -97,7 +97,7 @@ public class GameMain extends Page {
         return list;
     }
 
-    private boolean gameOver(){
+    protected boolean gameOver(){
         ArrayList<Area> list = getEmptyArea();
         if (list.isEmpty()){
             for (int i = 0; i < LINE - 1; i++){
@@ -121,7 +121,7 @@ public class GameMain extends Page {
         return list.isEmpty();
     }
 
-    private BufferedImage mapPaint(HashMap<Integer, Check> checkList){
+    protected BufferedImage mapPaint(HashMap<Integer, Check> checkList){
         BufferedImage map = new BufferedImage(Check.WIDTH * 4 + 24, Check.HEIGHT * 4 + 24, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = map.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -135,7 +135,7 @@ public class GameMain extends Page {
         return  map;
     }
 
-    private BufferedImage checkPaint(Check check){
+    protected BufferedImage checkPaint(Check check){
         BufferedImage checkImage = new BufferedImage(Check.WIDTH, Check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = checkImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -154,7 +154,7 @@ public class GameMain extends Page {
         return checkImage;
     }
 
-    private BufferedImage boxPaint(BufferedImage image, String text, int score){
+    protected BufferedImage boxPaint(BufferedImage image, String text, int score){
         BufferedImage scoreImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = scoreImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -244,7 +244,7 @@ public class GameMain extends Page {
         }
     }
 
-    private int moveAnimation(Direction direction, int number){
+    protected int moveAnimation(Direction direction, int number){
         if (number == 0){
             move(direction);
         }
@@ -273,7 +273,7 @@ public class GameMain extends Page {
         return ++number;
     }
 
-    private void move(Direction direction){
+    protected void move(Direction direction){
         switch (direction){
             case up:
                 moveUp();
@@ -290,7 +290,7 @@ public class GameMain extends Page {
         }
     }
 
-    private void moveUp(){
+    protected void moveUp(){
         boolean flag;
         for (int x = 0; x < LINE; x++) {
             for (int y = 1, index = 0; y < ROW; y++) {
@@ -315,7 +315,7 @@ public class GameMain extends Page {
         }
     }
 
-    private void moveDown(){
+    protected void moveDown(){
         boolean flag;
         for (int x = LINE - 1; x >= 0; x--){
             for (int y = ROW - 2, index = ROW - 1; y >=0 ; y--){
@@ -340,7 +340,7 @@ public class GameMain extends Page {
         }
     }
 
-    private void moveLeft(){
+    protected void moveLeft(){
         boolean flag;
         for (int x = 0; x < LINE; x++){
             for (int y = 1, index = 0; y < ROW; y++){
@@ -369,7 +369,7 @@ public class GameMain extends Page {
         }
     }
 
-    private void moveRight(){
+    protected void moveRight(){
         boolean flag;
         for (int x = LINE - 1; x >= 0; x--){
             for (int y = ROW - 2, index = ROW - 1; y >=0 ; y--){
