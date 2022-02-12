@@ -112,7 +112,7 @@ public class GameMain extends Page {
                     return false;
                 }
             }
-            for (int i = 3; i < LINE * ROW - 1; i += 4){
+            for (int i = 3; i < LINE * ROW - 1; i += LINE){
                 if(area[i].value == area[i + 4].value){
                     return false;
                 }
