@@ -5,19 +5,18 @@ import java.awt.*;
 /**
  * @author DebuggerZero
  */
-public class Check extends Map {
-    //定义方格的WIDTH, HEIGHT
-    public final static int WIDTH = 120;
-    public final static int HEIGHT = 120;
-
+public class Check extends Area {
     //移动步长
-    public double stepSize;
+    public int stepSizeX;
+    public int stepSizeY;
 
-    public Check(){
-        value = 0;
+    public Check(int x, int y, int value) {
+        super(x, y, value);
+        stepSizeX = 0;
+        stepSizeY = 0;
     }
 
-    public static Color getColor(int value){
+    public Color getColor(){
         switch (value) {
             case 0:
                 return new Color(0, 0, 0, 0);

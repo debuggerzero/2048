@@ -10,6 +10,7 @@ import java.awt.event.*;
 public abstract class Page extends JPanel implements ActionListener, MouseListener, KeyListener {
 
     public Page(){
+        super(true);
         addMouseListener(this);
         addKeyListener(this);
     }
