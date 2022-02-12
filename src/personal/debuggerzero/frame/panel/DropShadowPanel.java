@@ -1,4 +1,4 @@
-package personal.debuggerzero.frame;
+package personal.debuggerzero.frame.panel;
 
 import javax.swing.*;
 import javax.swing.border.Border;

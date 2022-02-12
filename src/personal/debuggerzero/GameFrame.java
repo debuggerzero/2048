@@ -3,7 +3,7 @@ package personal.debuggerzero;
 import personal.debuggerzero.frame.MyFrame;
 import personal.debuggerzero.game.GameMain;
 import personal.debuggerzero.game.GameStart;
-import personal.debuggerzero.game.Page;
+import personal.debuggerzero.frame.panel.Page;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,6 @@
 package personal.debuggerzero.frame;
 
+import personal.debuggerzero.frame.panel.DropShadowPanel;
 import personal.debuggerzero.frame.title.TitleBarPanel;
 
 import javax.swing.*;

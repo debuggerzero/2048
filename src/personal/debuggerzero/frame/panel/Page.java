@@ -1,4 +1,4 @@
-package personal.debuggerzero.game;
+package personal.debuggerzero.frame.panel;
 
 import javax.swing.*;
 import java.awt.*;
