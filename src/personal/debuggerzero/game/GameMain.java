@@ -50,12 +50,12 @@ public class GameMain extends Page {
 
     private Area[] area = new Area[LINE * ROW];
     private HashMap<Integer, Check> checkList = new HashMap<>();
-    Queue<Direction> moveList = new LinkedList<>();
+    private Queue<Direction> moveList = new LinkedList<>();
 
-    final int MOVE_NUMBER = 8;
-    int moveNumber = 0;
-    boolean moveFlag = false;
-    Direction direction;
+    private final int MOVE_NUMBER = 8;
+    private int moveNumber = 0;
+    private boolean moveFlag = false;
+    private Direction direction;
 
     private void initGame(){
         score = 0;
