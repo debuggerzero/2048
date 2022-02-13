@@ -1,6 +1,7 @@
 package personal.debuggerzero.game;
 
 import personal.debuggerzero.frame.panel.Page;
+import personal.debuggerzero.game.storage.Storage;
 
 import java.util.*;
 import javax.imageio.ImageIO;

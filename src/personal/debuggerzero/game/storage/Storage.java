@@ -1,4 +1,4 @@
-package personal.debuggerzero.game;
+package personal.debuggerzero.game.storage;
 
 import java.io.*;
 
