@@ -399,13 +399,17 @@ public class GameMain extends Page {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
             moveList.offer(Direction.up);
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
             moveList.offer(Direction.down);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
             moveList.offer(Direction.right);
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
             moveList.offer(Direction.left);
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             timer.stop();
             int result = JOptionPane.showConfirmDialog(
                     this,

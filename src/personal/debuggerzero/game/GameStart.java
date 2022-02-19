@@ -23,7 +23,6 @@ public class GameStart extends Page {
     private BufferedImage title;
 
     private int alpha = 100;
-    private int flag = 1;
 
     @Override
     public void initPage() throws Exception{
