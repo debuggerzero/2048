@@ -131,28 +131,9 @@ public class GameMain extends Page {
         g.setColor(new Color(255, 255, 255, 50));
         g.fillRoundRect(0, 0, Check.WIDTH * 4 + 24, Check.HEIGHT * 4 + 24, 35,35);
         for (Integer i : checkList.keySet()) {
-            g.drawImage(checkPaint(checkList.get(i)), checkList.get(i).x, checkList.get(i).y, null);
+            g.drawImage(checkList.get(i).checkPaint(), checkList.get(i).x, checkList.get(i).y, null);
         }
         return  map;
-    }
-
-    protected BufferedImage checkPaint(Check check){
-        BufferedImage checkImage = new BufferedImage(Check.WIDTH, Check.HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = checkImage.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(check.getColor());
-        g.fillOval(0,0, Check.WIDTH, Check.HEIGHT);
-        Color color = check.value == 0 ? new Color(0,0,0,0) : check.value <= 4 ? Color.BLACK:Color.WHITE;
-        g.setColor(color);
-        Font font= Check.getFont(check.value);
-        g.setFont(font);
-        FontMetrics fm = g.getFontMetrics(font);
-        int widthX = (checkImage.getWidth() - fm.stringWidth(Integer.toString(check.value))) / 2;
-        int widthY = (checkImage.getHeight() - fm.getDescent() + fm.getAscent()) / 2;
-        g.drawString(Integer.toString(check.value), widthX, widthY);
-        g.dispose();
-        return checkImage;
     }
 
     protected BufferedImage boxPaint(BufferedImage image, String text, int score){

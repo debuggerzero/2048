@@ -1,6 +1,7 @@
 package personal.debuggerzero.game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * @author DebuggerZero
@@ -14,6 +15,25 @@ public class Check extends Area {
         super(x, y, value);
         stepSizeX = 0;
         stepSizeY = 0;
+    }
+
+    public BufferedImage checkPaint(){
+        BufferedImage checkImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = checkImage.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(getColor());
+        g.fillOval(0,0, WIDTH, HEIGHT);
+        Color color = value == 0 ? new Color(0,0,0,0) : value <= 4 ? Color.BLACK:Color.WHITE;
+        g.setColor(color);
+        Font font= Check.getFont(value);
+        g.setFont(font);
+        FontMetrics fm = g.getFontMetrics(font);
+        int widthX = (checkImage.getWidth() - fm.stringWidth(Integer.toString(value))) / 2;
+        int widthY = (checkImage.getHeight() - fm.getDescent() + fm.getAscent()) / 2;
+        g.drawString(Integer.toString(value), widthX, widthY);
+        g.dispose();
+        return checkImage;
     }
 
     public Color getColor(){
